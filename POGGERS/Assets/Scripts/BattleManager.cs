@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour {
     // Second index is enemy
     public CharacterController[] controllers;
 
+    // UI Variables
     public Text playerHpUI;
     public Text enemyHpUI;
     public Text timerUI;
@@ -32,13 +33,15 @@ public class BattleManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        #region UI Updates
+        // Updates the UI with proper information
         playerHpUI.text = "Your HP: " + controllers[0].getHp();
         enemyHpUI.text = "Enemy HP: " + controllers[1].getHp();
         actionUI.text = "Current Action: " + controllers[0].getCurrentActionString();
 
         if (activateTimer)
         {
-            if (timer < 0)
+            if (timer - Time.deltaTime < 0)
             {
                 timer = 0;
             } else
@@ -48,22 +51,31 @@ public class BattleManager : MonoBehaviour {
         }
 
         timerUI.text = timer.ToString("F2");
-	}
+        #endregion UI Updates
+    }
 
     IEnumerator BattleSystem()
     {
         while (true)
         {
+            #region Activate Timer
+
             activateTimer = true;
             timer = actionSelectTimer;
+
+            #endregion Activate Timer
 
             // Waits for action for the turn from each player
             yield return new WaitForSeconds(actionSelectTimer);
 
+            #region Deactivate Timer
+
             activateTimer = false;
             timer = 0f;
 
-            // Locks each player after
+            #endregion Deactivate Timer
+
+            // Locks each player's move after
             foreach (CharacterController controller in controllers)
             {
                 controller.lockMove();
@@ -72,6 +84,7 @@ public class BattleManager : MonoBehaviour {
             // Waits before preforming move
             yield return new WaitForSeconds(performActionTimer / 2);
 
+            #region Action Phase
             // Preforms Movement First
             foreach (CharacterController controller in controllers)
             {
@@ -82,10 +95,10 @@ public class BattleManager : MonoBehaviour {
             // Checks attacks for both players
             controllers[0].performAttack(controllers[1]);
             controllers[1].performAttack(controllers[0]);
+            #endregion Action Phase
 
             // Waits before reseting turns
             yield return new WaitForSeconds(performActionTimer / 2);
-
 
             // Resets Turns
             foreach (CharacterController controller in controllers)

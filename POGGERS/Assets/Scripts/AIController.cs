@@ -9,6 +9,7 @@ public class AIController : CharacterController {
     void Start()
     {
         hp = 3;
+        atk = 1;
 
         currentPosition = CharacterPosition.Middle;
         currentAction = CharacterAction.None;

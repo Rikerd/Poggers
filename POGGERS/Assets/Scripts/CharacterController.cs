@@ -5,13 +5,13 @@ using UnityEngine;
 public abstract class CharacterController : MonoBehaviour {
     protected int hp;
 
-    public int atk;
+    protected int atk;
 
     // Prevents futher action if turn is complete until reset by the BattleManager
     protected bool moveLocked;
 
     // Where the player is (left, middle, right)
-    public CharacterPosition currentPosition;
+    protected CharacterPosition currentPosition;
 
     // What the player is doing for the turn
     protected CharacterAction currentAction;
