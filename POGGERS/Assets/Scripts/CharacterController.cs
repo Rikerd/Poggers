@@ -11,7 +11,7 @@ public abstract class CharacterController : MonoBehaviour {
     protected bool moveLocked;
 
     // Where the player is (left, middle, right)
-    protected CharacterPosition currentPosition;
+    public CharacterPosition currentPosition;
 
     // What the player is doing for the turn
     protected CharacterAction currentAction;
@@ -68,11 +68,13 @@ public abstract class CharacterController : MonoBehaviour {
     #endregion Battle Damage Checks/Calculations
 
     #region Update Position
+    // SET ROTATION Y FOR OPPOSING SIDE TO 180 TO MOVE PROPERLY
     public void movePosition()
     {
+        // Checks which movement and properly updates
         if (currentAction == CharacterAction.MoveLeft)
         {
-            transform.position += new Vector3(-2, 0, 0);
+            transform.position -= transform.right * 2;
 
             // Checks and change to proper placement
             if (currentPosition == CharacterPosition.Middle)
@@ -86,7 +88,7 @@ public abstract class CharacterController : MonoBehaviour {
         }
         else if (currentAction == CharacterAction.MoveRight)
         {
-            transform.position += new Vector3(2, 0, 0);
+            transform.position += transform.right * 2;
 
             // Checks and change to proper placement
             if (currentPosition == CharacterPosition.Middle)
@@ -142,6 +144,38 @@ public abstract class CharacterController : MonoBehaviour {
     public CharacterAction getCurrentAction()
     {
         return currentAction;
+    }
+
+    public string getCurrentActionString()
+    {
+        if (currentAction == CharacterAction.AttackLeft)
+        {
+            return "Left Attack";
+        }
+        else if (currentAction == CharacterAction.AttackStraight)
+        {
+            return "Straight Attack";
+        }
+        else if (currentAction == CharacterAction.AttackRight)
+        {
+            return "Right Attack";
+        }
+        else if (currentAction == CharacterAction.MoveLeft)
+        {
+            return "Move Left";
+        }
+        else if (currentAction == CharacterAction.MoveRight)
+        {
+            return "Move Right";
+        }
+        else if (currentAction == CharacterAction.Block)
+        {
+            return "Block";
+        }
+        else
+        {
+            return "None";
+        }
     }
 
     public int getHp()

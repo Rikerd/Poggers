@@ -11,6 +11,8 @@ public class BattleManager : MonoBehaviour {
 
     public Text playerHpUI;
     public Text enemyHpUI;
+    public Text timerUI;
+    public Text actionUI;
     
     // Time game waits for player to perform move
     public float actionSelectTimer;
@@ -18,8 +20,13 @@ public class BattleManager : MonoBehaviour {
     // Time game takes to perform the move before waiting for next move
     public float performActionTimer;
 
+    // Timer UI Stats
+    private float timer;
+    private bool activateTimer;
+
 	// Use this for initialization
 	void Start () {
+        timer = actionSelectTimer;
         StartCoroutine(BattleSystem());
 	}
 	
@@ -27,14 +34,34 @@ public class BattleManager : MonoBehaviour {
 	void Update () {
         playerHpUI.text = "Your HP: " + controllers[0].getHp();
         enemyHpUI.text = "Enemy HP: " + controllers[1].getHp();
+        actionUI.text = "Current Action: " + controllers[0].getCurrentActionString();
+
+        if (activateTimer)
+        {
+            if (timer < 0)
+            {
+                timer = 0;
+            } else
+            {
+                timer -= Time.deltaTime;
+            }
+        }
+
+        timerUI.text = timer.ToString("F2");
 	}
 
     IEnumerator BattleSystem()
     {
         while (true)
         {
+            activateTimer = true;
+            timer = actionSelectTimer;
+
             // Waits for action for the turn from each player
             yield return new WaitForSeconds(actionSelectTimer);
+
+            activateTimer = false;
+            timer = 0f;
 
             // Locks each player after
             foreach (CharacterController controller in controllers)
