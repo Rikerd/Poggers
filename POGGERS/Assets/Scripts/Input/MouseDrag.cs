@@ -30,32 +30,26 @@ public class MouseDrag : MonoBehaviour {
 	string ReturnDirection() {
 		string result;
 
-		if (Mathf.Abs (Xdirection) < 100 &&
-		    Mathf.Abs (Ydirection) < 100) {
-			result = "none";
-			return result;
-		}
-
-		if (Ydirection < 0) {
-			if (Xdirection > 100) {
+		if (Ydirection < -100) {
+			if (Xdirection > 180){
 				result = "Attack-Left";
 				return result;
-			} else if (Xdirection < -100) {
+			} else if (Xdirection < -180) {
 				result = "Attack-Right";
 				return result;
 			} else {
 				result = "Attack-Center";
 				return result;
 			}
-		} else if (Ydirection > 0) {
+		} else if (Ydirection > 180) {
+			result = "Block";
+			return result;
+		} else if (Mathf.Abs (Xdirection) > 100) {
 			if (Xdirection > 100) {
-				result = "Dodge-Left";
+				result = "Move-Left";
 				return result;
 			} else if (Xdirection < -100) {
-				result = "Dodge-Right";
-				return result;
-			} else {
-				result = "Dodge-Center";
+				result = "Move-Right";
 				return result;
 			}
 		}
