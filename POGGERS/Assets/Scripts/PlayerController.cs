@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PlayerController : CharacterController {
 
-    private SpriteRenderer sprite;
-
 	// Use this for initialization
 	void Start ()
     {
         hp = 3;
+        atk = 1;
 
         currentPosition = CharacterPosition.Middle;
         currentAction = CharacterAction.None;
@@ -22,16 +21,6 @@ public class PlayerController : CharacterController {
     // Update is called once per frame
     void Update()
     {
-
-        if (currentAction == CharacterAction.Block)
-        {
-            sprite.color = Color.red;
-        }
-        else
-        {
-            sprite.color = Color.white;
-        }
-
         if (!moveLocked)
         {
             #region Left Move Input
@@ -43,18 +32,8 @@ public class PlayerController : CharacterController {
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                if (currentPosition == CharacterPosition.Middle)
+                if (currentPosition != CharacterPosition.Left)
                 {
-                    // If player is in the middle, move them to the left
-                    currentPosition = CharacterPosition.Left;
-                    currentAction = CharacterAction.MoveLeft;
-
-                    moveLocked = true;
-                }
-                else if (currentPosition == CharacterPosition.Right)
-                {
-                    // If player is on the right, move to the middle
-                    currentPosition = CharacterPosition.Middle;
                     currentAction = CharacterAction.MoveLeft;
 
                     moveLocked = true;
@@ -71,18 +50,8 @@ public class PlayerController : CharacterController {
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                if (currentPosition == CharacterPosition.Middle)
+                if (currentPosition != CharacterPosition.Right)
                 {
-                    // If player is in the middle, move them to the right
-                    currentPosition = CharacterPosition.Right;
-                    currentAction = CharacterAction.MoveRight;
-
-                    moveLocked = true;
-                }
-                else if (currentPosition == CharacterPosition.Left)
-                {
-                    // If player is on the left, move to the middle
-                    currentPosition = CharacterPosition.Middle;
                     currentAction = CharacterAction.MoveRight;
 
                     moveLocked = true;

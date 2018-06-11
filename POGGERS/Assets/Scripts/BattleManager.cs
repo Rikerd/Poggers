@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
 
+    // First index is character controlled player
+    // Second index is enemy
     public CharacterController[] controllers;
+
+    public Text playerHpUI;
+    public Text enemyHpUI;
     
     // Time game waits for player to perform move
     public float actionSelectTimer;
@@ -19,7 +25,8 @@ public class BattleManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        playerHpUI.text = "Your HP: " + controllers[0].getHp();
+        enemyHpUI.text = "Enemy HP: " + controllers[1].getHp();
 	}
 
     IEnumerator BattleSystem()
@@ -41,7 +48,8 @@ public class BattleManager : MonoBehaviour {
             // Preforms Movement First
             foreach (CharacterController controller in controllers)
             {
-                controller.moveSpritePosition();
+                controller.movePosition();
+                controller.changeSpriteColor();
             }
 
             // Checks attacks for both players

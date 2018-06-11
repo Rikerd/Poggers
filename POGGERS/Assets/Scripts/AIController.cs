@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AIController : CharacterController {
-
-    private SpriteRenderer sprite;
-
     private int moveChoice;
 
     // Use this for initialization
