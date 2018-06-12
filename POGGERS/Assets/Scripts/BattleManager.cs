@@ -14,6 +14,8 @@ public class BattleManager : MonoBehaviour {
     public Text enemyHpUI;
     public Text timerUI;
     public Text actionUI;
+    public GameObject gameOverPanel;
+    public Text gameOverPrompter;
     
     // Time game waits for player to perform move
     public float actionSelectTimer;
@@ -27,7 +29,11 @@ public class BattleManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        gameOverPanel.SetActive(false);
+
+        activateTimer = false;
         timer = actionSelectTimer;
+
         StartCoroutine(BattleSystem());
 	}
 	
@@ -100,11 +106,39 @@ public class BattleManager : MonoBehaviour {
             // Waits before reseting turns
             yield return new WaitForSeconds(performActionTimer / 2);
 
+            #region Post Action Phase
+            // Checks if a player is dead
+            if (controllers[0].isDead() || controllers[1].isDead())
+            {
+                activateTimer = false;
+
+                gameOverPanel.SetActive(true);
+
+                if (controllers[0].isDead() && controllers[1].isDead())
+                {
+                    // Both sides died at the same time
+                    gameOverPrompter.text = "TIE!";
+                }
+                else if (controllers[0].isDead())
+                {
+                    // Controlling player died
+                    gameOverPrompter.text = "YOU DIED!";
+                } else if (controllers[1].isDead())
+                {
+                    // Enemy died
+                    gameOverPrompter.text = "YOU WIN!";
+                }
+
+                //StopCoroutine(coroutine);
+                break;
+            }
+
             // Resets Turns
             foreach (CharacterController controller in controllers)
             {
                 controller.resetTurn();
             }
+            #endregion Post Action Phase
         }
     }
 }

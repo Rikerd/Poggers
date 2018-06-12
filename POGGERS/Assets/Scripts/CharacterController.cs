@@ -65,6 +65,11 @@ public abstract class CharacterController : MonoBehaviour {
             hp = 0;
         }
     }
+
+    public bool isDead()
+    {
+        return hp <= 0;
+    }
     #endregion Battle Damage Checks/Calculations
 
     #region Update Position
