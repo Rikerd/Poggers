@@ -465,8 +465,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllers:
-  - {fileID: 1517243662}
   - {fileID: 509888497}
+  - {fileID: 1517243662}
   networkedPlayers: []
   playerHpUI: {fileID: 21826750}
   enemyHpUI: {fileID: 301586867}

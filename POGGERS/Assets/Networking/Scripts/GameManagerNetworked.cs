@@ -34,7 +34,6 @@ public class GameManagerNetworked : NetworkBehaviour {
 
         #region Networked Players Setup
         networkedPlayers = GameObject.FindGameObjectsWithTag("Player");
-        print("Num of networked players: " + networkedPlayers.Length);
         #endregion
     }
 
@@ -45,7 +44,6 @@ public class GameManagerNetworked : NetworkBehaviour {
         if (networkedPlayers.Length != 2)
         {
             networkedPlayers = GameObject.FindGameObjectsWithTag("Player");
-            print("Num of networked players: " + networkedPlayers.Length);
             return;
         }
         #endregion
@@ -65,7 +63,12 @@ public class GameManagerNetworked : NetworkBehaviour {
         // Updates the UI with proper information
         playerHpUI.text = "Your HP: " + controllers[0].getHp();
         enemyHpUI.text = "Enemy HP: " + controllers[1].getHp();
-        actionUI.text = "Current Action: " + controllers[0].getCurrentActionString();
+
+        if (networkedPlayers[0].GetComponent<NetworkedPlayerInfo>().isLocalPlayer)
+            actionUI.text = "Current Action: " + controllers[0].getCurrentActionString();
+        else ///networkedPlayers[1].GetComponent<NetworkedPlayerInfo>().isLocalPlayer
+            actionUI.text = "Current Action: " + controllers[1].getCurrentActionString();
+        
 
         if (activateTimer)
         {
@@ -118,9 +121,12 @@ public class GameManagerNetworked : NetworkBehaviour {
             for (int i = 0; i < 2; i++)
             {
                 NetworkedPlayerInfo playerinfo = networkedPlayers[i].GetComponent<NetworkedPlayerInfo>();
-                NetworkedPlayerController playerSprite = controllers[i].GetComponent<NetworkedPlayerController>();
+                NetworkedPlayerController playerSprite;
+                if (playerinfo.isLocalPlayer)
+                    playerSprite = controllers[0].GetComponent<NetworkedPlayerController>();
+                else
+                    playerSprite = controllers[1].GetComponent<NetworkedPlayerController>();
 
-                print(playerinfo + " " + playerSprite);
                 playerinfo.getInfo();
                 playerSprite.PullInfo(playerinfo);
             }
