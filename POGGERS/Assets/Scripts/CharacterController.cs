@@ -11,9 +11,11 @@ public abstract class CharacterController : MonoBehaviour {
     protected bool moveLocked;
 
     // Where the player is (left, middle, right)
+    [SerializeField]
     protected CharacterPosition currentPosition;
 
     // What the player is doing for the turn
+    [SerializeField]
     protected CharacterAction currentAction;
 
     protected SpriteRenderer sprite;

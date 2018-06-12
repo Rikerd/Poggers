@@ -53,11 +53,9 @@ public class GameManagerNetworked : NetworkBehaviour {
         #region Networked Player Updates
         for (int i=0; i<2; i++)
         {
-            //PlayerController player = networkedPlayers[i].GetComponent<PlayerController>();
             NetworkedPlayerInfo playerinfo = networkedPlayers[i].GetComponent<NetworkedPlayerInfo>();
             NetworkedPlayerController playerSprite = controllers[i].GetComponent<NetworkedPlayerController>();
 
-            //playerSprite.PullInfo(player);
             playerinfo.getInfo();
             playerSprite.PullInfo(playerinfo);
         }
@@ -116,7 +114,21 @@ public class GameManagerNetworked : NetworkBehaviour {
             yield return new WaitForSeconds(performActionTimer / 2);
 
             #region Action Phase
+            // Updates Players First
+            for (int i = 0; i < 2; i++)
+            {
+                NetworkedPlayerInfo playerinfo = networkedPlayers[i].GetComponent<NetworkedPlayerInfo>();
+                NetworkedPlayerController playerSprite = controllers[i].GetComponent<NetworkedPlayerController>();
+
+                print(playerinfo + " " + playerSprite);
+                playerinfo.getInfo();
+                playerSprite.PullInfo(playerinfo);
+            }
             // Preforms Movement First
+            foreach (GameObject player in networkedPlayers)
+            {
+                player.GetComponent<CharacterController>().movePosition();
+            }
             foreach (CharacterController controller in controllers)
             {
                 controller.movePosition();
