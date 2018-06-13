@@ -15,6 +15,8 @@ public class GameManagerNetworked : NetworkBehaviour {
     public Text enemyHpUI;
     public Text timerUI;
     public Text actionUI;
+    public GameObject gameOverPanel;
+    public Text gameOverPrompter;
 
     // Time game waits for player to perform move
     public float actionSelectTimer;
@@ -149,6 +151,34 @@ public class GameManagerNetworked : NetworkBehaviour {
             // Waits before reseting turns
             yield return new WaitForSeconds(performActionTimer / 2);
 
+            #region Post Action Phase
+            // Checks if a player is dead
+            if (controllers[0].isDead() || controllers[1].isDead())
+            {
+                activateTimer = false;
+
+                gameOverPanel.SetActive(true);
+
+                if (controllers[0].isDead() && controllers[1].isDead())
+                {
+                    // Both sides died at the same time
+                    gameOverPrompter.text = "TIE!";
+                }
+                else if (controllers[0].isDead())
+                {
+                    // Controlling player died
+                    gameOverPrompter.text = "YOU DIED!";
+                }
+                else if (controllers[1].isDead())
+                {
+                    // Enemy died
+                    gameOverPrompter.text = "YOU WIN!";
+                }
+
+                //StopCoroutine(coroutine);
+                break;
+            }
+
             // Resets Turns
             foreach (CharacterController controller in controllers)
             {
@@ -158,6 +188,7 @@ public class GameManagerNetworked : NetworkBehaviour {
             {
                 player.GetComponent<CharacterController>().resetTurn();
             }
+            #endregion Post Action Phase
         }
     }
 }
