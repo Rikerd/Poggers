@@ -513,6 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c12107a7d5e179459032bc912bb5bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPSFX: {fileID: 810106834}
   currentPosition: 0
   currentAction: 0
 --- !u!212 &509888498
@@ -1915,6 +1916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f691550ddec6f4198c635c8a10000e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPSFX: {fileID: 942714540}
   currentPosition: 0
   currentAction: 0
 --- !u!212 &1517243663

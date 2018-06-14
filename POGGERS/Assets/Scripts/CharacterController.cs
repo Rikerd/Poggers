@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CharacterController : MonoBehaviour {
-    protected int hp;
+
+	public AudioSource HPSFX;
+
+	protected int hp;
 
     protected int atk;
 
@@ -61,6 +64,7 @@ public abstract class CharacterController : MonoBehaviour {
 
     public void takeDamage(int dmg)
     {
+		HPSFX.Play ();
         hp -= dmg;
         if (hp < 0)
         {
