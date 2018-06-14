@@ -170,10 +170,10 @@ public class PlayerController2 : CharacterController {
 		string result;
 
 		if (Ydirection < -100) {
-			if (Xdirection > 180){
+			if (Xdirection > 120){
 				result = "Attack-Left";
 				return result;
-			} else if (Xdirection < -180) {
+			} else if (Xdirection < -120) {
 				result = "Attack-Right";
 				return result;
 			} else {
