@@ -51,10 +51,20 @@ public class GameManagerNetworked : NetworkBehaviour {
         #endregion
 
         #region Networked Player Updates
-        for (int i=0; i<2; i++)
+        for (int i = 0; i < 2; i++)
         {
             NetworkedPlayerInfo playerinfo = networkedPlayers[i].GetComponent<NetworkedPlayerInfo>();
-            NetworkedPlayerController playerSprite = controllers[i].GetComponent<NetworkedPlayerController>();
+            NetworkedPlayerController playerSprite;
+            if (playerinfo.isLocalPlayer)
+            {
+                playerSprite = controllers[0].GetComponent<NetworkedPlayerController>();
+            }
+            else
+            {
+                networkedPlayers[i].GetComponent<PlayerController2>().enabled = false;
+                networkedPlayers[i].GetComponent<BoxCollider2D>().enabled = false;
+                playerSprite = controllers[1].GetComponent<NetworkedPlayerController>();
+            }
 
             playerinfo.getInfo();
             playerSprite.PullInfo(playerinfo);
@@ -67,10 +77,12 @@ public class GameManagerNetworked : NetworkBehaviour {
         enemyHpUI.text = "Enemy HP: " + controllers[1].getHp();
 
         if (networkedPlayers[0].GetComponent<NetworkedPlayerInfo>().isLocalPlayer)
-            actionUI.text = "Current Action: " + controllers[0].getCurrentActionString();
+            //actionUI.text = "Current Action: " + controllers[0].getCurrentActionString();
+            actionUI.text = "Current Action: " + networkedPlayers[0].GetComponent<NetworkedPlayerInfo>().getCurrentActionString();
         else ///networkedPlayers[1].GetComponent<NetworkedPlayerInfo>().isLocalPlayer
-            actionUI.text = "Current Action: " + controllers[1].getCurrentActionString();
-        
+            //actionUI.text = "Current Action: " + controllers[1].getCurrentActionString();
+            actionUI.text = "Current Action: " + networkedPlayers[1].GetComponent<NetworkedPlayerInfo>().getCurrentActionString();
+
 
         if (activateTimer)
         {

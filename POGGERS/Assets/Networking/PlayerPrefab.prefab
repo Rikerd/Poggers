@@ -21,8 +21,10 @@ GameObject:
   - component: {fileID: 4213560818041130}
   - component: {fileID: 114468321055628520}
   - component: {fileID: 114616899358463790}
+  - component: {fileID: 114575239229504824}
   - component: {fileID: 114892056958955062}
   - component: {fileID: 212108688580180200}
+  - component: {fileID: 61821225445857680}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -43,6 +45,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61821225445857680
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1993372575020986}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.011193275, y: -0.50366735}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 6, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10, y: 5}
+  m_EdgeRadius: 0
 --- !u!114 &114468321055628520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,9 +81,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43fb06bc98f4330458c29bb0a40de657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 114892056958955062}
+  playerController: {fileID: 114575239229504824}
   characterAction: 0
   characterPosition: 0
+--- !u!114 &114575239229504824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1993372575020986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c12107a7d5e179459032bc912bb5bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPosition: 0
+  currentAction: 0
 --- !u!114 &114616899358463790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,7 +135,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1993372575020986}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f57b06ade1520a34882bdc58eac8a984, type: 3}
   m_Name: 

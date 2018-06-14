@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class NetworkedPlayerInfo : NetworkBehaviour{
 
-    public PlayerController playerController;
+    public PlayerController2 playerController;
 
     [SyncVar]
     public CharacterAction characterAction;
@@ -25,6 +25,7 @@ public class NetworkedPlayerInfo : NetworkBehaviour{
         CmdUpdatePosition(playerController.getCurrentPosition());
         characterAction = playerController.getCurrentAction();
         characterPosition = playerController.getCurrentPosition();
+        print(playerController.getCurrentAction());
 	}
 
     public void getInfo()
@@ -39,11 +40,46 @@ public class NetworkedPlayerInfo : NetworkBehaviour{
     public void CmdUpdateAction(CharacterAction action)
     {
         characterAction = action;
+        print(netId  + " did " + action);
     }
 
     [Command]
     public void CmdUpdatePosition(CharacterPosition position)
     {
         characterPosition = position;
+        print(netId + " in " + position);
+    }
+
+
+    public string getCurrentActionString()
+    {
+        if (characterAction == CharacterAction.AttackLeft)
+        {
+            return "Left Attack";
+        }
+        else if (characterAction == CharacterAction.AttackStraight)
+        {
+            return "Straight Attack";
+        }
+        else if (characterAction == CharacterAction.AttackRight)
+        {
+            return "Right Attack";
+        }
+        else if (characterAction == CharacterAction.MoveLeft)
+        {
+            return "Move Left";
+        }
+        else if (characterAction == CharacterAction.MoveRight)
+        {
+            return "Move Right";
+        }
+        else if (characterAction == CharacterAction.Block)
+        {
+            return "Block";
+        }
+        else
+        {
+            return "None";
+        }
     }
 }
