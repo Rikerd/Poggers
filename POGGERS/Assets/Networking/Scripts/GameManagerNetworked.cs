@@ -148,12 +148,10 @@ public class GameManagerNetworked : NetworkBehaviour {
             foreach (GameObject player in networkedPlayers)
             {
                 player.GetComponent<CharacterController>().movePosition();
-                player.GetComponent<CharacterController>().movePositonTwo();
             }
             foreach (CharacterController controller in controllers)
             {
                 controller.movePosition();
-                controller.movePositonTwo();
                 controller.changeSpriteColor();
             }
 

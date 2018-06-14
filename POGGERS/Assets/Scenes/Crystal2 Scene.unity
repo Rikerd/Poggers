@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78949e45e08444a4c87fa3042b960c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPSFX: {fileID: 0}
   currentPosition: 0
   currentAction: 0
 --- !u!212 &509888498
@@ -510,6 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57b06ade1520a34882bdc58eac8a984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPSFX: {fileID: 0}
   currentPosition: 0
   currentAction: 0
 --- !u!1 &519420028
@@ -881,7 +883,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1872335135}
   gameOverPrompter: {fileID: 596063918}
   actionSelectTimer: 2
-  performActionTimer: 0.5
+  performActionTimer: 1
 --- !u!4 &1230965101
 Transform:
   m_ObjectHideFlags: 0
@@ -1347,6 +1349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78949e45e08444a4c87fa3042b960c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPSFX: {fileID: 0}
   currentPosition: 0
   currentAction: 0
 --- !u!212 &1517243663
@@ -1809,3 +1812,9 @@ MonoBehaviour:
   RightMove: {fileID: 21300018, guid: 8c0cd56f96bd04849bbc1a29a10bf531, type: 3}
   Block: {fileID: 21300024, guid: 8c0cd56f96bd04849bbc1a29a10bf531, type: 3}
   Idle: {fileID: 21300002, guid: 8c0cd56f96bd04849bbc1a29a10bf531, type: 3}
+  straightslash: {fileID: 0}
+  rightslash: {fileID: 0}
+  leftslash: {fileID: 0}
+  swing: {fileID: 0}
+  move: {fileID: 0}
+  block: {fileID: 0}
