@@ -126,7 +126,7 @@ public abstract class CharacterController : MonoBehaviour {
             transform.position = new Vector3(-2 * positionMultiplier, yPosition);
         } else if (currentPosition == CharacterPosition.Middle)
         {
-            transform.position = new Vector3(0, 0);
+            transform.position = new Vector3(0, yPosition);
         } else if (currentPosition == CharacterPosition.Right)
         {
             transform.position = new Vector3(2 * positionMultiplier, yPosition);
