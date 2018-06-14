@@ -110,6 +110,30 @@ public abstract class CharacterController : MonoBehaviour {
     }
     #endregion Update Position
 
+    #region Update Postion V2
+    public void movePositonTwo()
+    {
+        int positionMultiplier = 1;
+        int yPosition = 0;
+
+        if (transform.rotation.eulerAngles.x == 180)
+        {
+            positionMultiplier = -1;
+            yPosition = 2;
+        }
+        if (currentPosition == CharacterPosition.Left)
+        {
+            transform.position = new Vector3(-2 * positionMultiplier, yPosition);
+        } else if (currentPosition == CharacterPosition.Middle)
+        {
+            transform.position = new Vector3(0, 0);
+        } else if (currentPosition == CharacterPosition.Right)
+        {
+            transform.position = new Vector3(2 * positionMultiplier, yPosition);
+        }
+    }
+    #endregion Update Postion V2
+
     #region Update Sprite Color
     public void changeSpriteColor()
     {
