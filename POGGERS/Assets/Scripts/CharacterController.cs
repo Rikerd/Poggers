@@ -81,7 +81,7 @@ public abstract class CharacterController : MonoBehaviour {
         // Checks which movement and properly updates
         if (currentAction == CharacterAction.MoveLeft)
         {
-            transform.position -= transform.right * 2;
+            //transform.position -= transform.right * 2;
 
             // Checks and change to proper placement
             if (currentPosition == CharacterPosition.Middle)
@@ -95,7 +95,7 @@ public abstract class CharacterController : MonoBehaviour {
         }
         else if (currentAction == CharacterAction.MoveRight)
         {
-            transform.position += transform.right * 2;
+            //transform.position += transform.right * 2;
 
             // Checks and change to proper placement
             if (currentPosition == CharacterPosition.Middle)
